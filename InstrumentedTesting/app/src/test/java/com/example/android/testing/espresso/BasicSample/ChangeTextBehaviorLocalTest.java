@@ -24,7 +24,8 @@ import org.junit.runner.RunWith;
 public final class ChangeTextBehaviorLocalTest {
 
   public static final String STRING_TO_BE_TYPED = "Espresso";
-
+  public static final String STRING_123 = "123";
+  public static final String STRING_abcdef = "abcdef";
   /**
    * Use {@link ActivityScenarioRule} to create and launch the activity under test.
    */
@@ -69,7 +70,18 @@ public final class ChangeTextBehaviorLocalTest {
   }
   @Test
   public void validateCorrectStringsInTextView() {
-    // Checking the correct string Espresso was displaing in the TextView.
+    // Check whether the Espresso string is displayed correctly in the TextView.
     onView(withId(R.id.textToBeChanged)).check(matches(withText("Espresso")));
+  }
+  @Test
+  public void validateEditTextValues() {
+    // ToDo -start-
+    // Enter “123” and press Change Text button, and test the string
+    // Enter “123” and press Open Activity and Change Text button, and test the string in ShowTextActivity
+    // Without entering anything and press Change Text button and test the string (empty/null)
+    // Without entering anything and press Open Activity and Change Text button, and test the string in ShowTextActivity (null).
+    // Enter “abcdef” and press Change Text button, and test the string
+    // Enter “abcdef” and press Open Activity and Change Text button, and test the string in ShowTextActivity
+    // ToDo -finish-
   }
 }
