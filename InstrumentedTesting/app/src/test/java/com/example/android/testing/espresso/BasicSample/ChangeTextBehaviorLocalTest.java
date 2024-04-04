@@ -67,4 +67,9 @@ public final class ChangeTextBehaviorLocalTest {
     assertThat(Iterables.getOnlyElement(Intents.getIntents())).hasComponentClass(
         ShowTextActivity.class);
   }
+  @Test
+  public void validateCorrectStringsInTextView() {
+    // Checking the correct string Espresso was displaing in the TextView.
+    onView(withId(R.id.textToBeChanged)).check(matches(withText("Espresso")));
+  }
 }
