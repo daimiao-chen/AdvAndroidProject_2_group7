@@ -30,11 +30,6 @@ class LocalTestingUnitTest {
     fun incorrectEmailAddressFormat_withDoubleDots() {
         assertFalse(EmailValidator.isValidEmail("123@abc..com"))
     }
-    /** Incorrect email address format (without username), such as @abc.com  */
-    @Test
-    fun incorrectEmailAddressFormat_withoutUsername() {
-        assertFalse(EmailValidator.isValidEmail("@abc.com"))
-    }
     /** Incorrect email address format (without domain), such as testing123  */
     @Test
     fun incorrectEmailAddressFormat_withoutDomain() {
@@ -49,5 +44,10 @@ class LocalTestingUnitTest {
     @Test
     fun incorrectEmailAddressFormat_null() {
         assertFalse(EmailValidator.isValidEmail(null))
+    }
+
+    @Test
+    fun incorrectEmailAddressFormat_withoutUsername() {
+        assertFalse(EmailValidator.isValidEmail("@abc.com"))
     }
 }
