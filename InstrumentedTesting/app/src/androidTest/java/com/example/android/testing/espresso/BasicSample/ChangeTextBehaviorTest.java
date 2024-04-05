@@ -49,32 +49,52 @@ public class ChangeTextBehaviorTest {
 
     public static final String STRING_TO_BE_TYPED = "Espresso";
 
-    /**
-     * Use {@link ActivityScenarioRule} to create and launch the activity under test, and close it
-     * after test completes. This is a replacement for {@link androidx.test.rule.ActivityTestRule}.
-     */
     @Rule public ActivityScenarioRule<MainActivity> activityScenarioRule
             = new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void changeText_sameActivity() {
-        // Type text and then press the button.
-        onView(withId(R.id.editTextUserInput))
-                .perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
+    public void checkTextToBeChanged() {
+        onView(withId(R.id.textToBeChanged)).check(matches(withText("Hello Espresso!")));
+    }
+    @Test
+    public void enterString_changeTextButton_checkTextToBeChanged() {
+        onView(withId(R.id.editTextUserInput)).perform(typeText("123"));
         onView(withId(R.id.changeTextBt)).perform(click());
-
-        // Check that the text was changed.
-        onView(withId(R.id.textToBeChanged)).check(matches(withText(STRING_TO_BE_TYPED)));
+        onView(withId(R.id.textToBeChanged)).check(matches(withText("123")));
     }
 
     @Test
-    public void changeText_newActivity() {
-        // Type text and then press the button.
-        onView(withId(R.id.editTextUserInput)).perform(typeText(STRING_TO_BE_TYPED),
-                closeSoftKeyboard());
+    public void enterString_openActivityAndChangeButton_checkShowTextView() {
+        onView(withId(R.id.editTextUserInput)).perform(typeText("123"));
         onView(withId(R.id.activityChangeTextBtn)).perform(click());
-
-        // This view is in a different Activity, no need to tell Espresso.
-        onView(withId(R.id.show_text_view)).check(matches(withText(STRING_TO_BE_TYPED)));
+        onView(withId(R.id.show_text_view)).check(matches(withText("123")));
     }
+
+    @Test
+    public void changeTextButton_checkTextToBeChanged() {
+        onView(withId(R.id.changeTextBt)).perform(click());
+
+        onView(withId(R.id.textToBeChanged)).check(matches(withText("")));
+    }
+
+    @Test
+    public void openActivityAndChangeButton_checkShowTextView() {
+        onView(withId(R.id.activityChangeTextBtn)).perform(click());
+        onView(withId(R.id.show_text_view)).check(matches(withText("")));
+    }
+
+    @Test
+    public void enterString_changeTextButton_checkTextToBeChanged_abcdef() {
+        onView(withId(R.id.editTextUserInput)).perform(typeText("abcdef"));
+        onView(withId(R.id.changeTextBt)).perform(click());
+        onView(withId(R.id.textToBeChanged)).check(matches(withText("abcdef")));
+    }
+
+    @Test
+    public void enterString_openActivityAndChangeButton_checkShowTextView_abcdef() {
+        onView(withId(R.id.editTextUserInput)).perform(typeText("abcdef"));
+        onView(withId(R.id.activityChangeTextBtn)).perform(click());
+        onView(withId(R.id.show_text_view)).check(matches(withText("abcdef")));
+    }
+
 }
